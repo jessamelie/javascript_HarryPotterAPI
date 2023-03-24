@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Harry Potter API</title>
+    <link rel="stylesheet" href="">
+</head>
+<body>
+    <div class="wrapper">
+        <div class="main">
+            <div class="personnages"></div>
+        </div>
+    </div>
+
+    <script>
+        const url_api = "https://hp-api.onrender.com/api/characters";
+        fetch(url_api) //appel de l'url pour en faire une requête
+        .then(response => {
+            return response.json();    //ensuite on extrait la donnée
+        })
+        .then(data =>{              //ensuite on manipule la donnée avec une boucle For each
+            data.forEach(character => {
+                console.log("PERSONNAGES", character.name)
+                const card = `
+                    <div class="card">
+                        <div class="card-image" 
+                        style="width:200px ; height: 200px;
+                        background-image : url(${character.name}); 
+                        background-size : cover"></div>
+                        <div class="card-body">
+                            <h2>name: ${character.name}</h2>
+                            <p>House: ${character.house}</p> 
+                            <span>actor: ${character.house}</span> 
+                        </div>
+                    </div>
+                    
+                `
+            document.getElementById("personnages").innerHTML += card
+
+            });          
+        })
+
+    </script>
+</body>
+</html>
